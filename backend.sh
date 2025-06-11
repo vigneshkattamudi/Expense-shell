@@ -3,7 +3,7 @@
 LOGS_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 mkdir -p $LOGS_FOLDER
 
 USERID=$(id -u)
@@ -65,7 +65,7 @@ unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATE $? "Extracting backend application code"
 
 npm install &>>$LOG_FILE
-cp /home/ec2-user/Expense-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
+cp $SCRIPT_DIR/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
 
 # load the data before running backend
 
